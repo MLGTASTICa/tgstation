@@ -36,11 +36,12 @@
 			else
 				spread = round((i / projectiles_per_shot - 0.5) * variance)
 
-		var/obj/projectile/A = new projectile(get_turf(src))
-		A.preparePixelProjectile(target, source, params, spread)
+		var/obj/projectile/bullet = new projectile(get_turf(src))
+		bullet.firer = chassis
+		bullet.preparePixelProjectile(target, source, params, spread)
 
-		A.fire()
-		if(!A.suppressed && firing_effect_type)
+		bullet.fire()
+		if(!bullet.suppressed && firing_effect_type)
 			new firing_effect_type(get_turf(src), chassis.dir)
 		playsound(chassis, fire_sound, 50, TRUE)
 
